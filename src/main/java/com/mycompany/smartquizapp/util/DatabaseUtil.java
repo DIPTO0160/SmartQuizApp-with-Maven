@@ -1,0 +1,27 @@
+package com.mycompany.smartquizapp.util;
+
+import jakarta.servlet.ServletContext;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public final class DatabaseUtil {
+
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            throw new IllegalStateException("MySQL JDBC driver not found in application classpath", ex);
+        }
+    }
+
+    private DatabaseUtil() {
+    }
+
+    public static Connection getConnection(ServletContext context) throws SQLException {
+        String url = context.getInitParameter("dbUrl");
+        String user = context.getInitParameter("dbUser");
+        String password = context.getInitParameter("dbPassword");
+        return DriverManager.getConnection(url, user, password);
+    }
+}
