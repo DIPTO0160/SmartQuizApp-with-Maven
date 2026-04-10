@@ -1,2 +1,10 @@
+com/mycompany/smartquizapp/servlet/DashboardServlet.class
+com/mycompany/smartquizapp/util/PasswordUtil.class
+com/mycompany/smartquizapp/servlet/SignupServlet.class
+com/mycompany/smartquizapp/model/User.class
+com/mycompany/smartquizapp/servlet/LoginServlet.class
+com/mycompany/smartquizapp/util/DatabaseUtil.class
 com/mycompany/smartquizapp/JakartaRestConfiguration.class
+com/mycompany/smartquizapp/dao/UserDao.class
+com/mycompany/smartquizapp/servlet/LogoutServlet.class
 com/mycompany/smartquizapp/resources/JakartaEE8Resource.class

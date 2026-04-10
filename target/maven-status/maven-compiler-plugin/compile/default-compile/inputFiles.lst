@@ -1,2 +1,10 @@
+/Users/diptosarkar/Desktop/SmartQuizApp/SmartQuizApp/src/main/java/com/mycompany/smartquizapp/servlet/SignupServlet.java
 /Users/diptosarkar/Desktop/SmartQuizApp/SmartQuizApp/src/main/java/com/mycompany/smartquizapp/JakartaRestConfiguration.java
+/Users/diptosarkar/Desktop/SmartQuizApp/SmartQuizApp/src/main/java/com/mycompany/smartquizapp/model/User.java
+/Users/diptosarkar/Desktop/SmartQuizApp/SmartQuizApp/src/main/java/com/mycompany/smartquizapp/servlet/LogoutServlet.java
+/Users/diptosarkar/Desktop/SmartQuizApp/SmartQuizApp/src/main/java/com/mycompany/smartquizapp/servlet/LoginServlet.java
+/Users/diptosarkar/Desktop/SmartQuizApp/SmartQuizApp/src/main/java/com/mycompany/smartquizapp/dao/UserDao.java
 /Users/diptosarkar/Desktop/SmartQuizApp/SmartQuizApp/src/main/java/com/mycompany/smartquizapp/resources/JakartaEE8Resource.java
+/Users/diptosarkar/Desktop/SmartQuizApp/SmartQuizApp/src/main/java/com/mycompany/smartquizapp/util/PasswordUtil.java
+/Users/diptosarkar/Desktop/SmartQuizApp/SmartQuizApp/src/main/java/com/mycompany/smartquizapp/servlet/DashboardServlet.java
+/Users/diptosarkar/Desktop/SmartQuizApp/SmartQuizApp/src/main/java/com/mycompany/smartquizapp/util/DatabaseUtil.java
