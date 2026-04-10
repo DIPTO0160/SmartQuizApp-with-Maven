@@ -1,0 +1,155 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.mycompany.smartquizapp.model.QuizCategory" %>
+<%@ page import="com.mycompany.smartquizapp.model.QuizQuestion" %>
+<%
+    QuizCategory category = (QuizCategory) request.getAttribute("category");
+    List<QuizQuestion> questions = (List<QuizQuestion>) request.getAttribute("questions");
+    long durationSeconds = (Long) request.getAttribute("durationSeconds");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%= category.getTitle() %> | SmartQuizApp</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(180deg, #eff6ff, #f8fafc);
+            color: #0f172a;
+        }
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 32px 18px 48px;
+        }
+        .hero {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: rgba(248, 250, 252, 0.96);
+            backdrop-filter: blur(10px);
+            border-radius: 22px;
+            padding: 22px 24px;
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.10);
+            margin-bottom: 22px;
+        }
+        .hero h1 {
+            margin: 0 0 8px;
+        }
+        .timer {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: #10233f;
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .question {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+            margin-bottom: 18px;
+        }
+        .question h3 {
+            margin-top: 0;
+        }
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            cursor: pointer;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-top: 28px;
+        }
+        .button, .ghost {
+            padding: 13px 18px;
+            border-radius: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .button {
+            background: #1d4ed8;
+            color: #ffffff;
+        }
+        .ghost {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="hero">
+            <h1><%= category.getTitle() %></h1>
+            <p>Answer all 20 questions. The quiz submits automatically when the timer reaches zero.</p>
+            <div class="timer">Time Left: <span id="timer"></span></div>
+        </div>
+
+        <form id="quizForm" method="post" action="${pageContext.request.contextPath}/submit-quiz">
+            <input type="hidden" name="category" value="<%= category.getSlug() %>">
+
+            <% for (QuizQuestion question : questions) { %>
+                <section class="question">
+                    <h3><%= question.getId() %>. <%= question.getText() %></h3>
+                    <% for (String option : question.getOptions()) { %>
+                        <label class="option">
+                            <input type="radio" name="question_<%= question.getId() %>" value="<%= option %>">
+                            <span><%= option %></span>
+                        </label>
+                    <% } %>
+                </section>
+            <% } %>
+
+            <div class="footer">
+                <a class="ghost" href="${pageContext.request.contextPath}/dashboard">Back to Categories</a>
+                <button class="button" type="submit">Submit Quiz</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        (function () {
+            var remaining = <%= durationSeconds %>;
+            var timerElement = document.getElementById("timer");
+            var form = document.getElementById("quizForm");
+            var submitted = false;
+
+            function formatTime(totalSeconds) {
+                var minutes = Math.floor(totalSeconds / 60);
+                var seconds = totalSeconds % 60;
+                return String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+            }
+
+            function tick() {
+                timerElement.textContent = formatTime(remaining);
+                if (remaining <= 0 && !submitted) {
+                    submitted = true;
+                    form.submit();
+                    return;
+                }
+                remaining--;
+            }
+
+            form.addEventListener("submit", function () {
+                submitted = true;
+            });
+
+            tick();
+            setInterval(tick, 1000);
+        }());
+    </script>
+</body>
+</html>

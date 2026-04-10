@@ -1,5 +1,6 @@
 package com.mycompany.smartquizapp.servlet;
 
+import com.mycompany.smartquizapp.model.QuizCategory;
 import com.mycompany.smartquizapp.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,6 +25,7 @@ public class DashboardServlet extends HttpServlet {
         }
 
         request.setAttribute("user", user);
+        request.setAttribute("categories", QuizCategory.values());
         request.getRequestDispatcher("/WEB-INF/views/dashboard.jsp").forward(request, response);
     }
 }

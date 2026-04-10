@@ -7,6 +7,14 @@ import java.sql.SQLException;
 
 public final class DatabaseUtil {
 
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            throw new IllegalStateException("MySQL JDBC driver not found in application classpath", ex);
+        }
+    }
+
     private DatabaseUtil() {
     }
 
